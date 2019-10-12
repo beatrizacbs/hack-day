@@ -14,5 +14,6 @@ import java.util.List;
 @Document(collection = "parents")
 public class Parent extends User{
 
-    public List<Long> childIds;
+    private String type = "PARENT";
+    public List<String> childIds;
 }

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.io.IOException;
+
 @Controller
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -23,7 +25,11 @@ public class AuthController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/login")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity login(@RequestBody Login login){
-        return ResponseEntity.ok(authService.login(login));
+        try {
+            return ResponseEntity.ok(authService.login(login));
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
     }
 
 }

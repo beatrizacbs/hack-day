@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.Valid;
+import java.io.IOException;
+
 @Controller
 @RequestMapping("api/user")
 public class UserController {
@@ -24,16 +27,26 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/parent")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity createUser(@RequestBody Parent user){
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.ok(createdUser);
+    private ResponseEntity createParent(@Valid @RequestBody Parent user){
+        User createdUser = null;
+        try {
+            createdUser = userService.createUser(user);
+            return ResponseEntity.ok(createdUser);
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/child")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity createUser(@RequestBody Child user){
-        User createdUser = userService.createUser(user);
+    private ResponseEntity createChild(@Valid @RequestBody Child user){
+        User createdUser = null;
+        try {
+            createdUser = userService.createUser(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.ok(createdUser);
     }
 

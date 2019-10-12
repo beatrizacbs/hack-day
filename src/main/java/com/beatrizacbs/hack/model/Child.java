@@ -14,8 +14,10 @@ import java.util.List;
 @Document(collection = "children")
 public class Child extends User{
 
-    private List<Long> dreamIds;
-    private Date birth;
+    private String type = "CHILD";
+    private List<String> dreamIds;
+    private String parentId;
+    private String birth;
 
 
 }

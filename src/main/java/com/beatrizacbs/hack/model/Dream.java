@@ -14,7 +14,10 @@ import java.math.BigDecimal;
 public class Dream {
 
     @Id
-    private Long id;
+    private String id;
+
+    @NotNull
+    private String childId;
 
     @NotNull
     private String title;
