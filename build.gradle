@@ -4,8 +4,8 @@ plugins {
 	id 'java'
 }
 
-group = 'com.beatrizacbs'
-version = '0.0.1-SNAPSHOT'
+group = 'hack-api-backend'
+version = '1.0.0'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -26,4 +26,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	compileOnly 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
 }
