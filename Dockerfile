@@ -17,15 +17,14 @@ RUN echo "---- building application ----" && \
 FROM openjdk:8
 
 ARG VERSION
-ENV APP_ARTIFACT="hack-api-backend-${VERSION}.jar"
+ENV APP_ARTIFACT="hack.jar" \
+    APP_NAME="hack-${VERSION}.jar"
 
 LABEL maintainer="Justa" \
         version=$VERSION \
-        description=""
+        description="Service responsible for seding boot informations to Justa`s POS."
 
-COPY --from=BUILDER /usr/app/build/libs/$APP_ARTIFACT .
-ADD startup.sh //
+COPY --from=BUILDER /usr/app/build/libs/$APP_NAME .
+RUN mv $APP_NAME $APP_ARTIFACT
 EXPOSE 7010
-# ENTRYPOINT ["/bin/bash", "/startup.sh"]
-
-ENTRYPOINT ["/bin/bash", "startup.sh"]
+ENTRYPOINT ["java", "-Xmx128m", "-Duser.timezone=America/Sao_Paulo", "-jar", "/hack.jar"]
