@@ -18,6 +18,13 @@ public class Child extends User{
     private List<String> dreamIds;
     private String parentId;
     private String birth;
+    private Integer experience = 0;
+    private List<String> tasksConcluded;
+    private List<String> todoTasks;
+
+    public void addExperience(Integer experience){
+        this.experience += experience;
+    }
 
 
 }

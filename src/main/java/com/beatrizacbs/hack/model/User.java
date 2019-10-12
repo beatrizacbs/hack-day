@@ -3,8 +3,8 @@ package com.beatrizacbs.hack.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +17,7 @@ public class User {
     private String id;
 
     @NotNull
+    @Indexed(unique = true)
     private String email;
 
     @NotNull
