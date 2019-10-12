@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/task")
 public class TaskController {

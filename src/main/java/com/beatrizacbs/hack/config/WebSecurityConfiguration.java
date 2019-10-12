@@ -15,7 +15,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.cors().disable()
                 // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
                 // don't create session
