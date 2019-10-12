@@ -1,5 +1,6 @@
 package com.beatrizacbs.hack.controller;
 
+import com.beatrizacbs.hack.model.Child;
 import com.beatrizacbs.hack.model.Parent;
 import com.beatrizacbs.hack.model.User;
 import com.beatrizacbs.hack.service.IUserService;
@@ -24,6 +25,14 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/parent")
     @ResponseStatus(HttpStatus.OK)
     private ResponseEntity createUser(@RequestBody Parent user){
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.ok(createdUser);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/child")
+    @ResponseStatus(HttpStatus.OK)
+    private ResponseEntity createUser(@RequestBody Child user){
         User createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
