@@ -21,6 +21,7 @@ public class Child extends User{
     private Integer experience = 0;
     private List<String> tasksConcluded;
     private List<String> todoTasks;
+    private Integer currentLevel;
 
     public void addExperience(Integer experience){
         this.experience += experience;
