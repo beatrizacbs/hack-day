@@ -35,11 +35,32 @@ public class UserServiceImpl implements IUserService {
                 parentRepository.save(dbParent);
             });
             return childRepository.save((Child) user);
-        } else if (user instanceof Parent){
+        } else if (user instanceof Parent) {
             return parentRepository.save((Parent) user);
-        }else {
+        } else {
             throw new IOException("Parâmetros inválidos");
         }
 
+    }
+
+    @Override
+    public User getUser(String type, String id) throws IOException {
+        if (type.equals("CHILD")) {
+            Optional<Child> childOptional = childRepository.findById(id);
+            if (childOptional.isPresent()) {
+                return childOptional.get();
+            } else {
+                throw new IOException("O usuário não existe");
+            }
+        } else if (type.equals("PARENT")) {
+            Optional<Parent> parentOptional = parentRepository.findById(id);
+            if(parentOptional.isPresent()){
+                return parentOptional.get();
+            }else{
+                throw new IOException("O usuário não existe");
+            }
+        }else {
+            throw new IOException("Tipo do usuário não informado");
+        }
     }
 }

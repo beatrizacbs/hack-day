@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -27,7 +24,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/parent")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity createParent(@Valid @RequestBody Parent user){
+    public ResponseEntity createParent(@Valid @RequestBody Parent user){
         User createdUser = null;
         try {
             createdUser = userService.createUser(user);
@@ -40,7 +37,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/child")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity createChild(@Valid @RequestBody Child user){
+    public ResponseEntity createChild(@Valid @RequestBody Child user){
         User createdUser = null;
         try {
             createdUser = userService.createUser(user);
@@ -49,5 +46,17 @@ public class UserController {
         }
         return ResponseEntity.ok(createdUser);
     }
+
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE, value= "/child/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity getChildById(@PathVariable(value = "id") String id){
+        try {
+            return ResponseEntity.ok(userService.getUser("CHILD", id));
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+
 
 }

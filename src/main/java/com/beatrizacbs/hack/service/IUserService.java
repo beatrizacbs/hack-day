@@ -9,4 +9,6 @@ import java.io.IOException;
 public interface IUserService {
 
     public User createUser(User user) throws IOException;
+
+    public User getUser(String type, String id) throws IOException;
 }
